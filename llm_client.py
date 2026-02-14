@@ -38,7 +38,8 @@ def generate_response(prompt):
             messages=[
                 {"role": "user", "content": prompt}
             ],
-            temperature=0.2,)
+            temperature=0.2,
+            )
             
             latency = time.time() - start_time # track time
             logger.info(
