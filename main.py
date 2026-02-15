@@ -1,6 +1,7 @@
 from llm_client import generate_response
 from prompt_library import build_prompt
 from prompt_library.registry import registry
+from prompt_library.structured.generator import generate_structured
 
 
 def run_qa():
@@ -45,6 +46,24 @@ def run_extraction():
     )
     return prompt
 
+def run_structured():
+    schema = {
+        "name": "string",
+        "age": "integer",
+        "email": "string",
+        "is_active": "boolean"
+    }
+
+    prompt = input ("enter the text here")
+
+    result = generate_structured(prompt, schema)
+
+    print("\n--- STRUCTURED OUTPUT TEST ---")
+    print(f"Success:  {result['success']}")
+    print(f"Retries:  {result['retries']}")
+    print(f"Latency:  {result['latency']}")
+    print(f"Error:    {result['error']}")
+    print(f"Data:     {result['data']}")
 
 if __name__ == "__main__":
 
@@ -56,8 +75,9 @@ if __name__ == "__main__":
     print("  1. QA Assistant")
     print("  2. Summarization")
     print("  3. Extraction")
+    print("  4. Structured Output")
 
-    choice = input("\nEnter choice (1/2/3): ").strip()
+    choice = input("\nEnter choice (1/2/3/4): ").strip()
 
     if choice == "1":
         prompt = run_qa()
@@ -65,6 +85,9 @@ if __name__ == "__main__":
         prompt = run_summarization()
     elif choice == "3":
         prompt = run_extraction()
+    elif choice == "4":
+        run_structured()
+        exit(0)    
     else:
         print("Invalid choice")
         exit(1)
