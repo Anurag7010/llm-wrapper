@@ -1,4 +1,4 @@
-# LLM Wrapper
+# AI backend system
 
 A minimal, production-ready wrapper for LLM interactions. Builds prompts from templates, calls an OpenRouter-backed OpenAI client, handles retries with exponential backoff, logs structured metrics, and supports structured JSON output validation.
 
